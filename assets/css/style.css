@@ -95,6 +95,8 @@ aside:active {
   box-shadow: 0 0 10px #000;
 }
 .saveBtn:hover {
+  font-size: 20px;
+  transition: all 0.3s ease-in-out;
   box-shadow: 0 0 5px #000;
 }
 
