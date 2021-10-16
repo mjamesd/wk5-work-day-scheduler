@@ -13,6 +13,30 @@ textarea {
   padding: 10px;
 }
 
+textarea[disabled] {
+  background: #559c55;
+  transition: all 0.9s ease-in-out;
+}
+
+aside {
+  position: absolute;
+  right: 3rem;
+  top: 3rem;
+  padding: 0.5rem 0.5rem;
+  margin: 0.5rem 0.5rem;
+  border: 1px solid #000;
+  border-radius: 10rem;
+}
+
+aside:hover {
+  font-size:20px;
+}
+
+aside:active {
+  box-shadow: 0 0 10px #000;
+  transition: hover 0.1s ease-in-out;
+}
+
 .jumbotron {
   text-align: center;
   background-color: transparent;
@@ -63,9 +87,19 @@ textarea {
   border-bottom-right-radius: 15px;
   background-color: #06aed5;
   color: white;
-}
-
-.saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
+}
+
+.saveBtn:active {
+  box-shadow: 0 0 10px #000;
+}
+.saveBtn:hover {
+  font-size: 20px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 5px #000;
+}
+
+.hiddenOnLoad {
+  display: none;
 }
