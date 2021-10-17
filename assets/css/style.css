@@ -91,10 +91,14 @@ aside:active {
   transition: all 0.3s ease-in-out;
 }
 
+.savingBtn {
+   background-color: #04748e;
+}
+
 .saveBtn:active {
   box-shadow: 0 0 10px #000;
 }
-.saveBtn:hover {
+.saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 0 5px #000;

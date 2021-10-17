@@ -1,7 +1,7 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Author: Mark Drummond
 // Date: 16-Oct-2021
-// Assignment: Day Planner
+// Assignment: Work Day Planner
 // See README.md for more information
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -27,30 +27,33 @@ Features:
 // ~~~~~~~~~~~~~~~~~~~~
 // DOCUEMENT SELECTORS HERE
 // ~~~~~~~~~~~~~~~~~~~~
-let currentDayEl = $("#currentDay");
-let timeblockContainerEl = $("#timeblockContainer");
-let toggleFullDayEl = $("#fullDay");
+const currentDayEl = $("#currentDay");
+const timeblockContainerEl = $("#timeblockContainer");
+const toggleFullDayEl = $("#fullDay");
 
 // ~~~~~~~~~~~~~~~~~~~~
 // GLOBAL VARIABLES HERE
 // ~~~~~~~~~~~~~~~~~~~~
 
-// let datetime = moment("2020-10-12 10:34:00"); // the datetime Leon was born! ... for testing purposes
-let datetime = moment(); // now
-let datetimeYMD = datetime.format("YY-MM-DD"); // Unimplemented feature to have multiple days
+const datetime = moment("2020-10-12 10:34:00"); // the datetime my son, Leon, was born! ... for testing purposes 🙂
+// const datetime = moment(); // now
+// const datetimeYMD = datetime.format("YY-MM-DD"); // Unimplemented feature to have multiple days
 let fullDay = false; // turn fullDay on to show all 24 hours.
 const standardBusinessHourStart = 9; // 9am
 const standardBusinessHourEnd = 17; // 5pm
-let descriptionPlaceholder = "Enter your task here"; // set the default placeholder
+const descriptionPlaceholder = "Enter your task here"; // set the default placeholder
 
 // classes for time blocks
-let timeBlockClasses = "time-block row";
-let hourClasses = "hour col-1";
-let descriptionClasses = "description col-10";
-let saveBtnClasses = "saveBtn col-1";
-let hiddenOnLoadClass = " hiddenOnLoad"; // space in front because we are going to add it to the other classes
-let saveButtonText = "&#x1f4be;"; // HTML entity for save icon
-let hourglassText = "&#x23f3;"; // HTML entity for hourglass icon
+const timeBlockClasses = "time-block row";
+const hourClasses = "hour col-1";
+const descriptionClasses = "description col-10";
+const saveBtnClasses = "saveBtn col-1";
+const savingBtnClasses = savingBtnClasses;
+// const hiddenOnLoadClass = " hiddenOnLoad"; // space in front because we are going to add it to the other classes
+// const saveBtnText = "&#x1f4be;"; // HTML entity for save icon
+// const hourglassText = "&#x23f3;"; // HTML entity for hourglass icon
+const saveIconClasses = "far fa-save";
+const hourglassIconClasses = "fas fa-hourglass-half";
 
 
 // ~~~~~~~~~~~~~~~~~~~~
@@ -63,7 +66,7 @@ function renderCurrentDay() {
     // currentDayEl.append("Time: " + datetime.format("h:mm:ss a")); // for testing purposes
 }
 
-function renderTimeBlocks(start = 0, end = 23) { // 9am to 5pm
+function renderTimeBlocks(start = standardBusinessHourStart, end = standardBusinessHourEnd) {
     // Loop through each hour and render each time block
     // Each time block has three elements: div for the hour, textarea for the description, and div with button for the save.
     // Include logic to hid all time block elements outside of standard business hours
@@ -82,8 +85,8 @@ function renderTimeBlocks(start = 0, end = 23) { // 9am to 5pm
         let thisWrapperClasses = timeBlockClasses;
         // console.log(currentHour, standardBusinessHourStart, standardBusinessHourEnd);
         // Hide timeblocks outside of standard business hours for unimplemented feature to have multiple days.
-        if (currentHour < standardBusinessHourStart || currentHour > standardBusinessHourEnd)
-            thisWrapperClasses += hiddenOnLoadClass;
+        // if (currentHour < standardBusinessHourStart || currentHour > standardBusinessHourEnd)
+            // thisWrapperClasses += hiddenOnLoadClass;
         let wrapper = $("<div>").addClass(thisWrapperClasses);
         let hour = $("<div>").addClass(hourClasses).text(currentHour);
         // Unimplemented feature to have multiple days:
@@ -93,9 +96,13 @@ function renderTimeBlocks(start = 0, end = 23) { // 9am to 5pm
             thisDescription = "";
         else
             description.val(thisDescription);
-        let saveBtn = $("<button>").addClass(saveBtnClasses).attr("data-hour", currentHour).html(saveButtonText); // must use .html() for HTML entity
+        let saveBtn = $("<button>").addClass(saveBtnClasses).attr("data-hour", currentHour);
+        let saveButtonText = $("<i>").addClass("far fa-save");
+        saveBtn.append(saveButtonText);
+        // saveBtn.innerHTML = saveButtonText;
         wrapper.append(hour, description, saveBtn);
         timeblockContainerEl.append(wrapper);
+        // timeblockContainerEl.append(`<i class="far fa-save"></i>`);
         // For accessibility:
         saveBtn.attr("aria-label", "Save");
     }
@@ -108,12 +115,18 @@ function renderTimeBlocks(start = 0, end = 23) { // 9am to 5pm
         // localStorage.setItem(`tb-${datetimeYMD}-${$(this)[0].dataset.hour}`, $(this).val());
         localStorage.setItem(`tb-${$(this)[0].dataset.hour}`, $(this).val());
         let thisDescription = $(this);
-        thisDescription.attr("disabled", "disabled");
-        let thisSaveBtn = $(this).next(); // The next element is the save button
-        thisSaveBtn.html(hourglassText); // Change icon to hourglass...
+        thisDescription.attr("disabled", "disabled"); // disable field
+        let thisSaveBtn = $(this).next();  // The next element is the save button
+        let thisSaveIcon = thisSaveBtn.children().eq(0); // The first (and only) child of the save button is the <i> icon element
+        // console.log(thisSaveBtn);
+        thisSaveBtn.addClass(savingBtnClasses); // darken the save button
+        thisSaveIcon.removeClass(saveIconClasses); // remove save icon...
+        thisSaveIcon.addClass(hourglassIconClasses); // Change icon to hourglass...
         setTimeout(function () {
-            thisSaveBtn.html(saveButtonText); // Wait half a second and then change the icon back ;-)
-            thisDescription.removeAttr("disabled");
+            thisSaveBtn.removeClass(savingBtnClasses); // remove darkening of save button
+            thisSaveIcon.removeClass(hourglassIconClasses); // remove hourglass...
+            thisSaveIcon.addClass(saveIconClasses); // Wait half a second and then change the icon back ;-)
+            thisDescription.removeAttr("disabled"); // re-enable field
         }, 500);
     });
 
