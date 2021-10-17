@@ -35,8 +35,8 @@ const toggleFullDayEl = $("#fullDay");
 // GLOBAL VARIABLES HERE
 // ~~~~~~~~~~~~~~~~~~~~
 
-const datetime = moment("2020-10-12 10:34:00"); // the datetime my son, Leon, was born! ... for testing purposes 🙂
-// const datetime = moment(); // now
+// const datetime = moment("2020-10-12 10:34:00"); // the datetime my son, Leon, was born! ... for testing purposes 🙂
+const datetime = moment(); // now
 // const datetimeYMD = datetime.format("YY-MM-DD"); // Unimplemented feature to have multiple days
 let fullDay = false; // turn fullDay on to show all 24 hours.
 const standardBusinessHourStart = 9; // 9am
