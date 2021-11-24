@@ -107,3 +107,12 @@ aside:active {
 .hiddenOnLoad {
   display: none;
 }
+
+.watchlist-block textarea {
+  border: 1px solid black !important;
+}
+
+footer {
+  text-align: center;
+  padding: 15px 0px 40px;
+}
