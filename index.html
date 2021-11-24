@@ -23,9 +23,28 @@
   <!-- <aside id="fullDay" class="hiddenOnLoad">
       Toggle full day
     </aside> -->
-  <div class="container" id="timeblockContainer">
+  <main class="container" id="timeblockContainer">
+    <div class="watchlist-block row">
+      <textarea class="description hour col-3" id="watchlist-title-1" data-hour="watchlist-title-1" placeholder="Enter Watchlist Name"></textarea>
+      <textarea class="description col-8" id="watchlist-1" data-hour="watchlist-1" placeholder="Enter your watchlist items here"></textarea>
+      <button class="saveBtn col-1" data-hour="watchlist-save-1" aria-label="Save"><i class="far fa-save"></i></button>
+    </div>
+    <div class="watchlist-block row">
+      <textarea class="description hour col-3" id="watchlist-title-2" data-hour="watchlist-title-2" placeholder="Enter Watchlist Name"></textarea>
+      <textarea class="description col-8" id="watchlist-2" data-hour="watchlist-2" placeholder="Enter your watchlist items here"></textarea>
+      <button class="saveBtn col-1" data-hour="watchlist-save-2" aria-label="Save"><i class="far fa-save"></i></button>
+    </div>
+    <div class="watchlist-block row">
+      <textarea class="description hour col-3" id="watchlist-title-3" data-hour="watchlist-title-3" placeholder="Enter Watchlist Name"></textarea>
+      <textarea class="description col-8" id="watchlist-3" data-hour="watchlist-3" placeholder="Enter your watchlist items here"></textarea>
+      <button class="saveBtn col-1" data-hour="watchlist-save-3" aria-label="Save"><i class="far fa-save"></i></button>
+    </div>
     <!-- Timeblocks go here -->
-  </div>
+  </main>
+
+  <footer>
+    &copy; 2021 DrumDev
+  </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>

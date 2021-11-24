@@ -60,6 +60,15 @@ const hourglassIconClasses = "fas fa-hourglass-half";
 // FUNCTIONS HERE
 // ~~~~~~~~~~~~~~~~~~~~
 
+function renderWatchLists() {
+    for (let index = 1; index <= 3; index++) {
+        let thisTitle = localStorage.getItem(`tb-watchlist-title-${index}`);
+        let thisDescription = localStorage.getItem(`tb-watchlist-${index}`);
+        $(`#watchlist-title-${index}`).val(thisTitle);
+        $(`#watchlist-${index}`).val(thisDescription);
+    }
+}
+
 function renderCurrentDay() {
     currentDayEl.append(datetime.format("dddd, MMM Do, YYYY"));
     // currentDayEl.append("<br />");
@@ -154,6 +163,8 @@ function renderTimeBlocks(start = standardBusinessHourStart, end = standardBusin
 
 // 1. Add event listeners
 // $(toggleFullDayEl).click(setFullDay);
+// 1. Render saved info for Watchlist blocks
+renderWatchLists();
 // 2. Render current day at top of page
 renderCurrentDay();
 // 3. Render timeblocks
